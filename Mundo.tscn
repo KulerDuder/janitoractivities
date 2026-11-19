@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://pokvy3lnqcon"]
+
+[ext_resource type="Script" uid="uid://dh2bvkd64myli" path="res://peana.gd" id="1_pe05s"]
+[ext_resource type="Script" uid="uid://caf6x68b2tfvc" path="res://player.gd" id="2_ubi47"]
+[ext_resource type="Script" uid="uid://uxcuoowhn4p8" path="res://instituto_mundo.gd" id="3_xywc0"]
+[ext_resource type="Script" uid="uid://q18qlt24jgk3" path="res://zonas.gd" id="4_gejyx"]
+[ext_resource type="Script" uid="uid://ci27u2q8magp1" path="res://filtro_cine.gd" id="5_5yunf"]
+[ext_resource type="Script" uid="uid://cqx420ewda4or" path="res://suciedad.gd" id="6_drrim"]
+[ext_resource type="Script" uid="uid://cx2ugayxm6uux" path="res://aspiradora.gd" id="7_jlv7k"]
+[ext_resource type="Script" uid="uid://87qxsit1mi48" path="res://audio_player.gd" id="8_ftdas"]
+[ext_resource type="Script" uid="uid://beipb45fahrx6" path="res://maquina_bebidas.gd" id="9_ftdas"]
+[ext_resource type="Script" uid="uid://pmq8nsk530ap" path="res://monstruo.gd" id="10_jnlhy"]
+[ext_resource type="PackedScene" uid="uid://c8rogx7kofwl0" path="res://monstruo_peludo_godot.glb" id="11_lb1h3"]
+
+[node name="Mundo" type="Node3D" unique_id=946085662]
+
+[node name="peana" type="Node3D" parent="." unique_id=844915790]
+script = ExtResource("1_pe05s")
+
+[node name="player" type="Node3D" parent="." unique_id=653967033]
+script = ExtResource("2_ubi47")
+
+[node name="aspiradora" type="Node3D" parent="player" unique_id=1022238490]
+script = ExtResource("7_jlv7k")
+
+[node name="pasitos" type="Node3D" parent="player" unique_id=533935410]
+script = ExtResource("8_ftdas")
+
+[node name="instituto_mundo" type="Node3D" parent="." unique_id=1140472658]
+script = ExtResource("3_xywc0")
+
+[node name="zonas_instituto" type="Node3D" parent="." unique_id=1397237865]
+script = ExtResource("4_gejyx")
+
+[node name="filtro" type="Node3D" parent="." unique_id=41693496]
+script = ExtResource("5_5yunf")
+
+[node name="suciedad" type="Node3D" parent="." unique_id=331357076]
+script = ExtResource("6_drrim")
+
+[node name="maquina_bebida" type="Node3D" parent="." unique_id=1307138081]
+script = ExtResource("9_ftdas")
+
+[node name="Monstruo" type="Node3D" parent="." unique_id=1150395340]
+script = ExtResource("10_jnlhy")
+
+[node name="monstruo_peludo_godot" parent="Monstruo" unique_id=1373368638 instance=ExtResource("11_lb1h3")]

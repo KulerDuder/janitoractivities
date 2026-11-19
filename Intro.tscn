@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cd1yn8yjeln3v"]
+
+[ext_resource type="Script" uid="uid://mv3r2dn3gmyl" path="res://ambiente.gd" id="1_33sem"]
+[ext_resource type="Script" uid="uid://dig3fynr6opke" path="res://instituto.gd" id="2_46ak0"]
+[ext_resource type="Script" uid="uid://dfl24jyeemgn7" path="res://suelo.gd" id="3_iysgs"]
+[ext_resource type="Script" uid="uid://dp3sadwdo8cxf" path="res://ui.gd" id="4_1rpvy"]
+
+[node name="Intro" type="Node3D" unique_id=32627091]
+
+[node name="ambiente" type="Node3D" parent="." unique_id=1417714053]
+script = ExtResource("1_33sem")
+
+[node name="instituto" type="Node3D" parent="." unique_id=1569014396]
+script = ExtResource("2_46ak0")
+
+[node name="suelo" type="Node3D" parent="." unique_id=39740464]
+script = ExtResource("3_iysgs")
+
+[node name="ui" type="Node3D" parent="." unique_id=657742386]
+script = ExtResource("4_1rpvy")

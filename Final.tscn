@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bkkebpp84j04q"]
+
+[ext_resource type="Script" uid="uid://chkun3nr8hgoi" path="res://peana_final.gd" id="1_r1d0p"]
+[ext_resource type="Script" uid="uid://bb7fjxqjrvf86" path="res://player_final.gd" id="2_okap3"]
+[ext_resource type="Script" uid="uid://bf4hyfff4h1bo" path="res://creditos_final.gd" id="3_ua7wf"]
+[ext_resource type="Script" uid="uid://bw832tmm5jj3l" path="res://lluvia_bloques.gd" id="4_jjy0o"]
+[ext_resource type="Script" uid="uid://ci27u2q8magp1" path="res://filtro_cine.gd" id="5_okap3"]
+
+[node name="Final" type="Node3D" unique_id=368588384]
+
+[node name="peana_final" type="Node3D" parent="." unique_id=2078610166]
+script = ExtResource("1_r1d0p")
+
+[node name="player_final" type="Node3D" parent="." unique_id=1419274531]
+script = ExtResource("2_okap3")
+
+[node name="creditos_final" type="Node3D" parent="." unique_id=2059833359]
+script = ExtResource("3_ua7wf")
+musica_mp3 = "uid://dtqf4i3ay6087"
+
+[node name="lluvia" type="Node3D" parent="." unique_id=964716125]
+script = ExtResource("4_jjy0o")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=2030570736]
+script = ExtResource("5_okap3")
