@@ -11,7 +11,7 @@ extends Node3D
 
 const CELL_SIZE: float = 1.5
 const MICRO_GRID: float = 0.18
-const Y_SUELO: float = 0.58
+const Y_SUELO: float = 0.05
 const SAMPLE_RATE: int = 22050
 
 var _mm_instance: MultiMeshInstance3D
@@ -44,7 +44,7 @@ func _ready() -> void:
 	_rng.seed = 98765
 	_preparar_audio_gotita()
 	_crear_hud_limpieza()
-	_generar_suciedad_limpia()
+	call_deferred("_generar_suciedad_limpia")
 
 func _unhandled_input(event: InputEvent) -> void:
 	# Tecla F9 de depuración para probar la transición al final al instante
@@ -227,16 +227,13 @@ func _generar_suciedad_limpia() -> void:
 	_actualizar_hud()
 
 func _es_posicion_prohibida(x: float, z: float) -> bool:
-	if x < -25.1 or x > 25.1 or z < -45.1 or z > -12.9:
-		return true
-	if x >= -11.2 and x <= -3.8 and z >= -26.2 and z <= -12.0:
-		return true
-	if abs(z - (-26.0)) < 0.5 or abs(z - (-32.0)) < 0.5:
-		return true
-	for x_muro: float in [-18.0, -11.0, -4.0, 4.0, 11.0, 18.0]:
-		if abs(x - x_muro) < 0.5:
+	var mapas := get_tree().get_nodes_in_group("mapa_instituto")
+	if not mapas.is_empty():
+		var mapa: Node = mapas[0]
+		if mapa.esta_bloqueado(x, z) or mapa.es_zona_segura(Vector3(x, 1.0, z)):
 			return true
-	return false
+		return false
+	return (x < -25.1 or x > 25.1 or z < -45.1 or z > -12.9)
 
 func _world_to_cell(x: float, z: float) -> Vector2i:
 	return Vector2i(int(floor(x / CELL_SIZE)), int(floor(z / CELL_SIZE)))

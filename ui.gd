@@ -5,6 +5,7 @@ extends Node3D
 var _capa_ui: CanvasLayer
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_capa_ui = CanvasLayer.new()
 	add_child(_capa_ui)
 	_crear_filtro_cine_antiguo()

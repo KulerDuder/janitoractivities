@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://beipb45fahrx6" path="res://maquina_bebidas.gd" id="9_ftdas"]
 [ext_resource type="Script" uid="uid://pmq8nsk530ap" path="res://monstruo.gd" id="10_jnlhy"]
 [ext_resource type="PackedScene" uid="uid://c8rogx7kofwl0" path="res://monstruo_peludo_godot.glb" id="11_lb1h3"]
+[ext_resource type="Script" uid="uid://bjwm5f5eywj26" path="res://filosofia.gd" id="12_lb1h3"]
+[ext_resource type="Script" uid="uid://bg4fbacx54r6l" path="res://powerup_aspiradora.gd" id="13_uegni"]
+[ext_resource type="Script" uid="uid://beuu782d7wnym" path="res://bosque_exterior.gd" id="14_syf7j"]
+[ext_resource type="Script" uid="uid://cae2w6fatkvtl" path="res://guardado_web.gd" id="15_1pedo"]
 
 [node name="Mundo" type="Node3D" unique_id=946085662]
 
@@ -45,3 +49,17 @@ script = ExtResource("9_ftdas")
 script = ExtResource("10_jnlhy")
 
 [node name="monstruo_peludo_godot" parent="Monstruo" unique_id=1373368638 instance=ExtResource("11_lb1h3")]
+
+[node name="filosofia" type="Node3D" parent="." unique_id=1840075307]
+script = ExtResource("12_lb1h3")
+texto_boton_si = "YES"
+
+[node name="PowerUp" type="Node3D" parent="." unique_id=660050604]
+script = ExtResource("13_uegni")
+
+[node name="bosque" type="Node3D" parent="." unique_id=1640984190]
+script = ExtResource("14_syf7j")
+ruta_final_bosque = "uid://ckvqouplev7cm"
+
+[node name="guardado" type="Node3D" parent="." unique_id=1038079508]
+script = ExtResource("15_1pedo")

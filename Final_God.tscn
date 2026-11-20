@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://oalkc4kme2y0"]
+
+[ext_resource type="Script" uid="uid://61wkhgdlhudm" path="res://final_god.gd" id="1_3qdja"]
+
+[node name="FinalGod" type="Node3D" unique_id=1958568301]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=648747540]
+script = ExtResource("1_3qdja")
+ruta_modelo_nube = "uid://bggenwxa6lj17"
+ruta_modelo_personaje = "uid://bursca5t6j5v0"
+ruta_modelo_zeus = "uid://cc3fkd7y004k4"

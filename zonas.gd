@@ -11,7 +11,7 @@ var _label_estado: Label
 
 func _ready() -> void:
 	_crear_hud_zona()
-	_construir_todas_las_zonas()
+	call_deferred("_construir_todas_las_zonas")
 
 func _crear_hud_zona() -> void:
 	var capa := CanvasLayer.new()
@@ -50,32 +50,17 @@ func _crear_hud_zona() -> void:
 	vbox.add_child(_label_estado)
 
 func _construir_todas_las_zonas() -> void:
-	# 1. Pasillo principal y vestíbulo (prioridad 0: cubre la T completa de corredores)
-	_registrar_zona("Main Hallway", Vector3(0.0, 1.8, -29.0), Vector3(51.0, 3.4, 5.4), false, 0)
-	_registrar_zona("Main Hallway (Lobby)", Vector3(0.0, 1.8, -19.2), Vector3(7.4, 3.4, 14.0), false, 0)
+	var mapas := get_tree().get_nodes_in_group("mapa_instituto")
+	if mapas.is_empty():
+		push_warning("zonas.gd: No se encontró 'mapa_instituto'")
+		return
+	var mapa: Node = mapas[0]
 	
-	# 2. Habitaciones individuales (prioridad 1: sobrescriben el pasillo al cruzar el umbral)
-	var salas: Array[Dictionary] = [
-		# Ala Sur (Z de -12.4 a -25.6)
-		{"nombre": "Janitor Office",      "centro": Vector3(-7.5,  1.8, -19.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": true},
-		{"nombre": "Classroom 101",       "centro": Vector3(-14.5, 1.8, -19.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Classroom 102",       "centro": Vector3(-22.0, 1.8, -19.0), "tam": Vector3(7.4, 3.4, 13.0), "segura": false},
-		{"nombre": "Principal's Office",  "centro": Vector3(7.5,   1.8, -19.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Classroom 103",       "centro": Vector3(14.5,  1.8, -19.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Storage Room",        "centro": Vector3(22.0,  1.8, -19.0), "tam": Vector3(7.4, 3.4, 13.0), "segura": false},
-		
-		# Ala Norte (Z de -32.4 a -45.6)
-		{"nombre": "Science Lab",         "centro": Vector3(-22.0, 1.8, -39.0), "tam": Vector3(7.4, 3.4, 13.0), "segura": false},
-		{"nombre": "Classroom 201",       "centro": Vector3(-14.5, 1.8, -39.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Classroom 202",       "centro": Vector3(-7.5,  1.8, -39.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Library",             "centro": Vector3(0.0,   1.8, -39.0), "tam": Vector3(7.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Art Room",            "centro": Vector3(7.5,   1.8, -39.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Restrooms",           "centro": Vector3(14.5,  1.8, -39.0), "tam": Vector3(6.5, 3.4, 13.0), "segura": false},
-		{"nombre": "Gymnasium",           "centro": Vector3(22.0,  1.8, -39.0), "tam": Vector3(7.4, 3.4, 13.0), "segura": false}
-	]
+	for p: Dictionary in mapa.pasillos:
+		_registrar_zona(p["nombre"], p["centro"], p["tamano"], p["segura"], 0)
 	
-	for sala: Dictionary in salas:
-		_registrar_zona(sala["nombre"], sala["centro"], sala["tam"], sala["segura"], 1)
+	for hab: Dictionary in mapa.habitaciones:
+		_registrar_zona(hab["nombre"], hab["centro"], hab["tamano"], hab["segura"], 1)
 
 func _registrar_zona(nombre: String, centro: Vector3, tamano: Vector3, es_segura: bool, prioridad: int) -> void:
 	var area := Area3D.new()
@@ -121,7 +106,6 @@ func _actualizar_zona_actual() -> void:
 		zona_actual = "Outside"
 		jugador_a_salvo = false
 	else:
-		# Elegimos la zona de mayor prioridad (las aulas tienen prioridad 1 frente a 0 del pasillo)
 		var elegida: Dictionary = _zonas_activas[0]
 		for z: Dictionary in _zonas_activas:
 			if z["prioridad"] >= elegida["prioridad"]:

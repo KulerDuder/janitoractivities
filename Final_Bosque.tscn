@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://ckvqouplev7cm"]
+
+[ext_resource type="Script" uid="uid://ci27u2q8magp1" path="res://filtro_cine.gd" id="1_kpfsb"]
+[ext_resource type="Script" uid="uid://byf62h1o3uq5a" path="res://final_bosque.gd" id="2_djak0"]
+
+[node name="FinalBosque" type="Node3D" unique_id=432102999]
+
+[node name="Node3D" type="Node3D" parent="." unique_id=467765020]
+script = ExtResource("1_kpfsb")
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=670955072]
+script = ExtResource("2_djak0")
+musica_mp3 = "uid://4jmqgyuosgg7"

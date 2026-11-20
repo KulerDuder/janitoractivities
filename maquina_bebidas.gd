@@ -15,14 +15,20 @@ var _rng := RandomNumberGenerator.new()
 
 func _ready() -> void:
 	_rng.seed = 24680
-	# Ubicada dentro de la Janitor Office (X de -11 a -4, Z de -26 a -12), pegada a la pared izquierda
-	position = Vector3(-10.1, 0.52, -16.5)
+	# Ubicada dentro de la Janitor Office (X de -11 a -4, Z de -26 a -12), apoyada en Y = 0.0
+	position = Vector3(-10.1, 0.0, -16.5)
 	rotation_degrees.y = 90.0
 	
 	_construir_modelo_maquina()
 	_crear_area_interaccion()
 	_crear_hud_interaccion()
 	_preparar_audio_lata()
+	call_deferred("_registrar_en_mapa")
+
+func _registrar_en_mapa() -> void:
+	var mapas := get_tree().get_nodes_in_group("mapa_instituto")
+	if not mapas.is_empty():
+		mapas[0].registrar_obstaculo(position + Vector3(0.0, 1.0, 0.0), Vector3(0.85, 2.15, 1.15))
 
 func _crear_mat(color: Color, roughness: float = 0.6, emision: float = 0.0) -> StandardMaterial3D:
 	var mat := StandardMaterial3D.new()
